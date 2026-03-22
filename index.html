@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student TACP</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://kit.fontawesome.com/06e4f2b1fc.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!---navigation bar--->
+<div id="mainlinks">
+    <div class="link">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="timetable.html">Timetable</a>
+    </div>
+</div>
+
+<h1 class="headline-gradient">Welcome to your Student page</h1>
+
+<div class="progress-container">
+  <svg class="progress-ring" width="150" height="150">
+    <circle class="progress-ring__background" cx="75" cy="75" r="60"/>
+    <circle class="progress-ring__progress" cx="75" cy="75" r="60"/>
+  </svg>
+  <div class="progress-text">
+    <span id="done">78</span><br>
+    <small>/240 op</small>
+  </div>
+  <script src="./js/progress.js"></script>
+<script>
+  setProgress(78, 240);
+</script>
+</div>
+
+
+<h2 class="subtitles">LECTURE LINKS</h2>
+
+
+</body>
+</html>
