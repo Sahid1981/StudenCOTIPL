@@ -52,9 +52,9 @@ body{
   stroke-linecap: round;
   transform: rotate(-90deg);
   transform-origin: center;
-  stroke-dasharray: 377; /* 2 * pi * 60 */
+  stroke-dasharray: 377; 
   stroke-dashoffset: 377;
-
+  transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress-text {
