@@ -18,10 +18,28 @@
     </div>
 </div>
 
+<!--headline--->
 <h1 class="headline-gradient">Courses</h1>
 
-<h2 class="subtitles">CURRENT COURSES<a
 
 
+<!--subtitles-->
+<h2 class="subtitles">CURRENT COURSES</h2>
+<button id="openPopupBtn" class="addpopup" type="button"><i class="fa-solid fa-circle-plus"></i></button>
+
+<script src="./js/popup.js"></script>
+<!--popup-->
+<div id="addcoursepopup" class="popup">
+    <div class="popup-content">
+        <h3 class="popup-headline">Add Course</h3>
+        <input id="code" placeholder="Course Code"><br>
+        <input id="name" placeholder="Course Name"><br>
+        <input id="credits" placeholder="Credits"><br>
+        <input id="lectures" placeholder="Lectures"><br>
+        <input id="recordings" placeholder="Recordings"><br>
+        <button id="addCourseBtn" class="popupbutton" type="button">Add Course</button>
+        <button id="cancelPopupBtn" class="popupbutton" type="button">Cancel</button>
+    </div>
+</div>
 </body>
 </html>
