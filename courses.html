@@ -23,22 +23,34 @@
 
 
 
-<!--subtitles-->
+<!--Courses-->
+
+<script type="module" src="./js/courses.js"></script>
+<div id="courses">
 <h2 class="subtitles">CURRENT COURSES</h2>
 <button id="openPopupBtn" class="addpopup" type="button"><i class="fa-solid fa-circle-plus"></i></button>
-
-<script src="./js/popup.js"></script>
+</div>
+<div id ="current"></div>
+<h2 class="subtitles">PASSED COURSES</h2>
+<div id="passed"></div>
 <!--popup-->
-<div id="addcoursepopup" class="popup">
+<script src="./js/popup.js"></script>
+<div id="addcoursepopup" class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
     <div class="popup-content">
-        <h3 class="popup-headline">Add Course</h3>
-        <input id="code" placeholder="Course Code"><br>
-        <input id="name" placeholder="Course Name"><br>
-        <input id="credits" placeholder="Credits"><br>
-        <input id="lectures" placeholder="Lectures"><br>
-        <input id="recordings" placeholder="Recordings"><br>
-        <button id="addCourseBtn" class="popupbutton" type="button">Add Course</button>
-        <button id="cancelPopupBtn" class="popupbutton" type="button">Cancel</button>
+        <div class="popup-header">
+            <h3 id="popupTitle" class="popup-headline">Add Course</h3>
+            <button id="cancelPopupBtn" class="popup-close" type="button" aria-label="Close">x</button>
+        </div>
+        <div class="popup-fields">
+            <input id="code" placeholder="Course Code">
+            <input id="name" placeholder="Course Name">
+            <input id="credits" placeholder="Credits">
+            <input id="lectures" placeholder="Lectures">
+            <input id="recordings" placeholder="Recordings">
+        </div>
+        <div class="popup-actions">
+            <button id="addCourseBtn" class="popupbutton" type="button">Add Course</button>
+        </div>
     </div>
 </div>
 </body>

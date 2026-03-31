@@ -9,8 +9,13 @@ function setProgress(done, max) {
     const percent = done / max;
     const offset = circumference * (1 - percent);
 
+    
     circle.style.strokeDasharray = String(circumference);
-    circle.style.strokeDashoffset = String(offset);
+    circle.style.strokeDashoffset = String(circumference);
+
+    requestAnimationFrame(() => {
+        circle.style.strokeDashoffset = String(offset);
+    });
 
     const doneEl = document.getElementById('done');
     if (doneEl) {
