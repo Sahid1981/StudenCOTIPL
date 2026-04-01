@@ -21,6 +21,7 @@
   --color-box-hover: rgba(219, 88, 0, 0.25);
 }
 
+/* --- Global Styles --- */
 html {
     font-size: 16px;
 }
@@ -57,7 +58,20 @@ body{
   color: transparent;
 }
 
+.subtitles {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: left;
+  margin: 1.5rem auto 0;
+  max-width: 72rem;
+  padding: 0 1.5rem;
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-text));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
 
+/* --- Progress Ring --- */
 .progress-container {
   position: relative;
   width: 150px;
@@ -96,19 +110,7 @@ body{
   text-align: center;
 }
 
-.subtitles {
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: left;
-  margin: 1.5rem auto 0;
-  max-width: 72rem;
-  padding: 0 1.5rem;
-  background: linear-gradient(to right, var(--color-primary), var(--color-primary-text));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
+/* --- Course Sections --- */
 #courses {
   display: flex;
   align-items: center;
@@ -123,7 +125,7 @@ body{
   padding: 0;
 }
 
-/* Add course popup */
+/* --- course popup --- */
 #addcoursepopup {
   display: none;
   position: fixed;
@@ -214,6 +216,7 @@ body{
   }
 }
 
+/* --- Course boxes and Lecture Links --- */
 #current,
 #passed, #lectureLinks{
   display: grid;
@@ -291,6 +294,7 @@ body{
   cursor: pointer;
 }
 
+/* --- Timetable Section --- */
 .timetable-wrap {
   max-width: 72rem;
   margin: 1.5rem auto 2.5rem;
