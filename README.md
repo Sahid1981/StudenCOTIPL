@@ -173,16 +173,23 @@ PORT=3000
 
 ## 3. Initialize database (optional)
 
-You can manually set up the database using the seed file:
+You can manually set up the database using the seed file before starting the backend:
 
+Linux/macOS:
 ```bash
 mysql -u root -p < backend/seed.sql
 ```
 
-Or let the backend auto-create the database on first startup. The seed file includes:
-- Database creation
-- Courses table with full schema
-- Sample course data (optional)
+Windows PowerShell:
+```powershell
+Get-Content backend/seed.sql | mysql -u root -p
+```
+
+The seed file creates:
+- The `cotipl` database
+- The `courses` table with full schema
+
+Important: the backend does not create the database itself. Import the seed file first, then start the backend.
 
 ## 4. Start backend
 
@@ -216,7 +223,6 @@ http://localhost:3000/api/health
 4. Return to Home page to monitor credits and grade metrics
 5. Use Timetable page for weekly calendar view
 
-If you prefer a file-based workflow, you can still open `index.html` directly or use a local static server.
 
 <div align="right">
 <a href="#table-of-contents">Back to top</a>
