@@ -1,3 +1,7 @@
+/*
+Handles grade avarage meter and sets it maximum value.
+*/
+
 const progress_API_BASE_URL = `http://${window.location.hostname}:3000`;
 
 function loadProgress() {
@@ -14,7 +18,7 @@ function loadProgress() {
             return response.json();
         })
         .then((progress) => {
-            setProgress(progress.done, progress.max);
+            setProgress(progress.done);
         })
         .catch((error) => {
             console.error('Error fetching progress:', error);

@@ -1,3 +1,9 @@
+/*
+Handles course creation popup and color randomiser
+for the borders of the created boxes and sends given
+data to backend.
+*/
+
 const API_BASE_URL = `http://${window.location.hostname}:3000`;
 
 function rancolor() {

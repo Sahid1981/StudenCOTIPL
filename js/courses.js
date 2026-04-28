@@ -1,3 +1,10 @@
+/*  
+Handles 3 things:
+    - Divides courses to passed and current.
+    - grade input when you press passed Button 
+    - course box creation
+*/
+
 const COURSES_API_BASE_URL = `http://${window.location.hostname}:3000`;
 
 export async function loadCourses() {
@@ -24,6 +31,8 @@ export async function loadCourses() {
     }
 }
 
+
+ 
 async function markCoursePassed(code) {
     const input = window.prompt('Enter grade (0-5):');
     if (input === null) {

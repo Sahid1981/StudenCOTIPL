@@ -1,3 +1,7 @@
+/*
+Handles grade avarage meter and sets it maximum value.
+*/
+
 const grade_API_BASE_URL = `http://${window.location.hostname}:3000`;
 
 function loadGrade() {
@@ -14,7 +18,7 @@ function loadGrade() {
             return response.json();
         })
         .then((payload) => {
-            setGrade(payload.averageGrade, payload.maxGrade);
+            setGrade(payload.averageGrade);
         })
         .catch((error) => {
             console.error('Error fetching grade:', error);

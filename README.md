@@ -278,6 +278,7 @@ The following pages and tools were used for guidance, inspiration, and help whil
 - [Canva website color schemes](https://www.canva.com/learn/website-color-schemes/) for color palette ideas
 - [Visual Studio Code](https://code.visualstudio.com/) for coding
 - [Visual Studio](https://visualstudio.microsoft.com/) AI tools for guidance and fixing errors
+- [W3Schools](https://www.w3schools.com/) for HTML, CSS and JavaScript tutorials
 
 <div align="right">
 <a href="#table-of-contents">Back to top</a>
