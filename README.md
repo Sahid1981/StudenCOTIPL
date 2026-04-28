@@ -131,6 +131,8 @@ The project demonstrates frontend-backend integration, RESTful API design, datab
 StudenCOTIPL/
 	backend/
 		server.js
+		seed.sql
+		.env
 	css/
 		style.css
 	js/
@@ -165,11 +167,24 @@ Create a file at `backend/.env` with:
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_password
-DB_NAME=student_db
+DB_NAME=cotipl
 PORT=3000
 ```
 
-## 3. Start backend
+## 3. Initialize database (optional)
+
+You can manually set up the database using the seed file:
+
+```bash
+mysql -u root -p < backend/seed.sql
+```
+
+Or let the backend auto-create the database on first startup. The seed file includes:
+- Database creation
+- Courses table with full schema
+- Sample course data (optional)
+
+## 4. Start backend
 
 ```bash
 npm start
@@ -181,7 +196,7 @@ Backend runs at:
 http://localhost:3000
 ```
 
-## 4. Verify backend health
+## 5. Verify backend health
 
 Open:
 
@@ -196,11 +211,12 @@ http://localhost:3000/api/health
 # Frontend Usage
 
 1. Start the backend first
-2. Open `index.html` in browser
+2. Open `http://localhost:3000/` in browser
 3. Navigate to Courses page to add and update courses
 4. Return to Home page to monitor credits and grade metrics
 5. Use Timetable page for weekly calendar view
 
+If you prefer a file-based workflow, you can still open `index.html` directly or use a local static server.
 
 <div align="right">
 <a href="#table-of-contents">Back to top</a>
