@@ -25,10 +25,27 @@ export async function loadCourses() {
 }
 
 async function markCoursePassed(code) {
+    const input = window.prompt('Enter grade (0-5):');
+    if (input === null) {
+        return;
+    }
+
+    const grade = Number(input.trim());
+    if (!Number.isInteger(grade) || grade < 0 || grade > 5) {
+        alert('Grade must be an integer between 0 and 5.');
+        return;
+    }
+
     try {
         const response = await fetch(
             `${COURSES_API_BASE_URL}/api/courses/${encodeURIComponent(code)}/passed`,
-            { method: 'PATCH' }
+            {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ grade })
+            }
         );
 
         if (!response.ok) {

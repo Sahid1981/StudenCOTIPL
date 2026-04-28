@@ -71,12 +71,19 @@ body{
   color: transparent;
 }
 
-/* --- Progress Ring --- */
+/* --- meters --- */
+.meters {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
 .progress-container {
   position: relative;
   width: 150px;
   height: 150px;
-  margin: 20px auto;
+  margin: 20px 0;
 }
 
 .progress-ring__background {
@@ -87,6 +94,16 @@ body{
 
 .progress-ring__progress {
   fill: transparent;
+  stroke: var(--color-primary-text);
+  stroke-width: 12;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset 5s linear;
+}
+
+.progress-ring__grade {
+    fill: transparent;
   stroke: var(--color-primary-text);
   stroke-width: 12;
   stroke-linecap: round;

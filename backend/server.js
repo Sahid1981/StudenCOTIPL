@@ -29,18 +29,47 @@ async function initDatabase() {
 			recordings VARCHAR(255) NOT NULL,
 			lectures VARCHAR(255) NOT NULL,
 			passed TINYINT(1) NOT NULL DEFAULT 0,
+			grade INT NULL,
 			color varchar(10) NOT NULL DEFAULT '#ff0000'
 		)
 	`);
+
+	try {
+		await pool.query('ALTER TABLE courses ADD COLUMN grade INT NULL');
+	} catch (error) {
+		if (!error || error.code !== 'ER_DUP_FIELDNAME') {
+			throw error;
+		}
+	}
+
+	try {
+		await pool.query('CREATE INDEX idx_courses_passed ON courses (passed)');
+	} catch (error) {
+		if (!error || error.code !== 'ER_DUP_KEYNAME') {
+			throw error;
+		}
+	}
 }
 
 app.get('/api/health', (_req, res) => {
 	res.json({ ok: true });
 });
 
-app.get('/api/courses', async (_req, res) => {
+app.get('/api/courses', async (req, res) => {
+	const { passed } = req.query;
+	let passedFilter = null;
+
+	if (passed !== undefined) {
+		if (passed !== 'true' && passed !== 'false') {
+			return res.status(400).json({ error: 'Invalid passed query. Use true or false.' });
+		}
+		passedFilter = passed === 'true' ? 1 : 0;
+	}
+
 	try {
-		const [rows] = await pool.query('SELECT * FROM courses');
+		const [rows] = passedFilter === null
+			? await pool.query('SELECT * FROM courses')
+			: await pool.query('SELECT * FROM courses WHERE passed = ?', [passedFilter]);
 		res.json(rows);
 	} catch (error) {
 		console.error('Error fetching courses:', error);
@@ -109,15 +138,21 @@ app.post('/api/courses', async (req, res) => {
 
 app.patch('/api/courses/:code/passed', async (req, res) => {
 	const code = String(req.params.code || '').trim();
+	const rawGrade = req.body?.grade;
 
 	if (!code) {
 		return res.status(400).json({ error: 'course code is required' });
 	}
 
+	const grade = Number(rawGrade);
+	if (!Number.isInteger(grade) || grade < 0 || grade > 5) {
+		return res.status(400).json({ error: 'grade must be an integer between 0 and 5' });
+	}
+
 	try {
 		const [result] = await pool.execute(
-			'UPDATE courses SET passed = 1 WHERE code = ? AND passed = 0',
-			[code]
+			'UPDATE courses SET passed = 1, grade = ? WHERE code = ? AND passed = 0',
+			[grade, code]
 		);
 
 		if (result.affectedRows === 0) {
@@ -126,7 +161,8 @@ app.patch('/api/courses/:code/passed', async (req, res) => {
 
 		return res.json({
 			message: 'Course marked as passed',
-			code
+			code,
+			grade
 		});
 	} catch (error) {
 		console.error('Error updating course passed flag:', error);
@@ -147,6 +183,41 @@ app.get('/api/courses/:passed', async (req, res) => {
 	} catch (error) {
 		console.error('Error fetching courses:', error);
 		res.status(500).json({ error: 'Failed to fetch courses' });
+	}
+});
+
+app.get('/api/progress', async (_req, res) => {
+	try {
+		const [rows] = await pool.query(`
+			SELECT
+				COALESCE(SUM(CASE WHEN passed = 1 THEN credits ELSE 0 END), 0) AS done
+			FROM courses
+		`);
+
+		const done = Number(rows[0]?.done || 0);
+		const max = 270;
+		return res.json({ done, max });
+	} catch (error) {
+		console.error('Error fetching progress:', error);
+		return res.status(500).json({ error: 'Failed to fetch progress' });
+	}
+});
+
+app.get('/api/grade', async (_req, res) => {
+	try {
+		const [rows] = await pool.query(`
+			SELECT
+				COALESCE(AVG(grade), 0) AS average_grade
+			FROM courses
+			WHERE grade IS NOT NULL
+		`);
+
+		const averageGrade = Number(rows[0]?.average_grade || 0);
+		const maxGrade = 5;
+		return res.json({ averageGrade, maxGrade });
+	} catch (error) {
+		console.error('Error fetching grade:', error);
+		return res.status(500).json({ error: 'Failed to fetch grade' });
 	}
 });
 

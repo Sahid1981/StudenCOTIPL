@@ -58,7 +58,8 @@ async function addCourse() {
                 lectures,
                 recordings,
                 passed: 0,
-                color: rancolor()
+                color: rancolor(),
+                grade: null
             })
         });
 

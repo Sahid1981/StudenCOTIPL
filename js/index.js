@@ -61,13 +61,12 @@ async function loadLectureLinks() {
     }
 
     try {
-        const response = await fetch(`${INDEX_API_BASE_URL}/api/courses`);
+        const response = await fetch(`${INDEX_API_BASE_URL}/api/courses?passed=false`);
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
 
-        const courses = await response.json();
-        const visibleCourses = courses.filter((course) => Number(course.passed) !== 1);
+        const visibleCourses = await response.json();
 
         container.innerHTML = '';
 
