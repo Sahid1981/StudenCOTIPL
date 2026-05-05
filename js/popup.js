@@ -25,7 +25,11 @@ function openPopup() {
 function closePopup() {
     const popup = document.getElementById('addcoursepopup');
     if (popup) {
-        popup.style.display = 'none';
+        popup.style.animation = 'popup-exit 0.22s ease forwards';
+        setTimeout(() => {
+            popup.style.display = 'none';
+            popup.style.animation = '';
+        }, 220);
     }
 }
 

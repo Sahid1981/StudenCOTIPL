@@ -3,7 +3,6 @@ Creation of boxes from current courses to index page.
 Sets link to "Not set" if link is not provided.
 */
 
-import { loadCourses } from './courses.js';
 
 const INDEX_API_BASE_URL = `http://${window.location.hostname}:3000`;
 
@@ -92,6 +91,5 @@ async function loadLectureLinks() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadCourses();
     loadLectureLinks();
 });
